@@ -4,7 +4,7 @@
   padding: 2rem;
   text-align: center;
 }
-
+/* 
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +39,30 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+body {
+  background-color: #0d0d0d; /* Дуже темний фон */
+  color: #e6e6e6; /* Світлий текст */
+  font-family: "Roboto Mono", monospace; /* Шрифт в стилі кіберпанк */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+}
+
+.container {
+  background-color: rgba(20, 20, 20, 0.8); /* Напівпрозорий блок */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3); /* Неоновий ефект */
+}
+.ReactModal__Overlay {
+  background-color: rgb(48 51 73 / 75%) !important;
 }

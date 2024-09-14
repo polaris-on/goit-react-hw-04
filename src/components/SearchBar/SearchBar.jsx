@@ -1,23 +1,32 @@
-/* eslint-disable react/prop-types */
 import { Form, Formik, Field } from "formik";
+import s from "./SearchBar.module.css";
 
-const SearchBar = ({ setQuery }) => {
+const SearchBar = ({ onSubmit }) => {
   const initialValues = {
     query: "",
   };
   const handleSubmit = (values) => {
     console.log(values);
-    setQuery(values.query);
+    onSubmit(values.query);
   };
   return (
-    <div>
+    <header className={s.header}>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
-          <Field name="query" placeholder="Enter search value" type="search" />
-          <button type="submit">Search</button>
+        <Form className={s.form}>
+          <Field
+            className={s.searchInput}
+            name="query"
+            placeholder="Search images and photos"
+            type="search"
+            autoComplete="off"
+            autoFocus
+          />
+          <button type="submit" className={s.button}>
+            Search
+          </button>
         </Form>
       </Formik>
-    </div>
+    </header>
   );
 };
 

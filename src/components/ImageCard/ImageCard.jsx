@@ -1,0 +1,19 @@
+import s from "./ImageCard.module.css";
+
+const ImageCard = ({ item, openModal }) => {
+  return (
+    <div>
+      <div className={s.imageWrapper}>
+        <img
+          onClick={() => openModal(item.alt_description, item.urls.regular)}
+          src={item.urls.small}
+          alt={item.alt_description}
+          // width={300}
+          // height={300}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ImageCard;

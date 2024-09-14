@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import List from "./List/List";
-import { fetchImg } from "../services/pixabay-api.js";
+import ImageGallery from "./ImageGallery/ImageGallery .jsx";
+import { fetchImg } from "../services/unsplash-api.js";
 import SearchBar from "./SearchBar/SearchBar";
 import Loader from "./Loader/Loader";
+import ErrorMessage from "./ErrorMessage/ErrorMessage.jsx";
+import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn.jsx";
+import "./App.css";
+import ImageModal from "./ImageModal/ImageModal.jsx";
 
 const App = () => {
   const [hits, setHits] = useState([]);
@@ -12,6 +16,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   useEffect(() => {
+    if (!query) return;
     const getData = async () => {
       try {
         setIsLoading(true);
@@ -36,17 +41,55 @@ const App = () => {
     setHits([]);
     setPage(1);
   };
+  const loadMore = () => setPage((prev) => prev + 1);
+
+  // Modal
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [alt, setAlt] = useState("");
+  const [modalUrls, setModalUrls] = useState("");
+
+  function openModal(alt, modalUrls) {
+    setIsOpen(true);
+    setAlt(alt);
+    setModalUrls(modalUrls);
+  }
+  // function afterOpenModal() {
+  // references are now sync'd and can be accessed.
+  // subtitle.style.color = "#f00";
+  // }
+
+  function closeModal() {
+    setIsOpen(false);
+    setAlt("");
+  }
 
   return (
-    <div>
-      <SearchBar setQuery={handleSetQuery} />
+    <div className="app">
+      <SearchBar onSubmit={handleSetQuery} />
       {isLoading && <Loader />}
-      {isError && <div>Ooops...</div>}
-      {/* {query && <div>Here is some {query}...</div>} */}
-      <List items={hits} />
-      {total > page && !isLoading && (
-        <button onClick={() => setPage((prev) => prev + 1)}>Load more</button>
-      )}
+      {isError && <ErrorMessage />}
+      <div className="container">
+        {hits.length > 0 && (
+          <>
+            {query && <div>Here is some {query}...</div>}
+            <ImageGallery
+              items={hits}
+              openModal={openModal}
+              closeModal={closeModal}
+            />
+          </>
+        )}
+
+        {/* <List items={hits} /> */}
+        <ImageModal
+          modalIsOpen={modalIsOpen}
+          // afterOpenModal={afterOpenModal}
+          closeModal={closeModal}
+          modalUrls={modalUrls}
+          alt={alt}
+        />
+        {total > page && !isLoading && <LoadMoreBtn loadMore={loadMore} />}
+      </div>
     </div>
   );
 };

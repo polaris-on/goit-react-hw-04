@@ -1,0 +1,15 @@
+.loadMore {
+  background-color: #00ffcc;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.4); /* Неонова тінь */
+}
+
+.loadMore:hover {
+  background-color: #00ffaa;
+}
