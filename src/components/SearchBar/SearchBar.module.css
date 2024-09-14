@@ -15,7 +15,7 @@
   width: 300px;
   padding: 10px;
   background-color: #2a2a2a;
-  border: 2px solid #00ffcc; /* Неоновий бордюр */
+  border: 2px solid #00ffcc;
   color: #e6e6e6;
   border-radius: 5px;
   outline: none;
@@ -33,5 +33,5 @@
 }
 
 .button:hover {
-  background-color: #00ffaa; /* Ефект при наведенні */
+  background-color: #00ffaa;
 }

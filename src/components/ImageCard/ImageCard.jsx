@@ -8,8 +8,6 @@ const ImageCard = ({ item, openModal }) => {
           onClick={() => openModal(item.alt_description, item.urls.regular)}
           src={item.urls.small}
           alt={item.alt_description}
-          // width={300}
-          // height={300}
         />
       </div>
     </div>

@@ -2,7 +2,6 @@ import s from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 
 const List = ({ items, openModal, closeModal }) => {
-  //   console.log(items);
   return (
     <ul className={s.imagesList}>
       {items.map((item) => (

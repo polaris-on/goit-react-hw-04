@@ -53,10 +53,6 @@ const App = () => {
     setAlt(alt);
     setModalUrls(modalUrls);
   }
-  // function afterOpenModal() {
-  // references are now sync'd and can be accessed.
-  // subtitle.style.color = "#f00";
-  // }
 
   function closeModal() {
     setIsOpen(false);
@@ -80,10 +76,8 @@ const App = () => {
           </>
         )}
 
-        {/* <List items={hits} /> */}
         <ImageModal
           modalIsOpen={modalIsOpen}
-          // afterOpenModal={afterOpenModal}
           closeModal={closeModal}
           modalUrls={modalUrls}
           alt={alt}

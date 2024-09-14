@@ -16,17 +16,10 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({
-  modalIsOpen,
-  //   afterOpenModal,
-  closeModal,
-  modalUrls,
-  alt,
-}) => {
+const ImageModal = ({ modalIsOpen, closeModal, modalUrls, alt }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
-      //   onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel={alt}
