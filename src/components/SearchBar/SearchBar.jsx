@@ -6,7 +6,6 @@ const SearchBar = ({ onSubmit }) => {
     query: "",
   };
   const handleSubmit = (values) => {
-    console.log(values);
     onSubmit(values.query);
   };
   return (

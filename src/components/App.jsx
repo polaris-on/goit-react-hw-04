@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ImageGallery from "./ImageGallery/ImageGallery .jsx";
+import ImageGallery from "./ImageGallery/ImageGallery.jsx";
 import { fetchImg } from "../services/unsplash-api.js";
 import SearchBar from "./SearchBar/SearchBar";
 import Loader from "./Loader/Loader";
@@ -22,11 +22,9 @@ const App = () => {
         setIsLoading(true);
         setIsError(false);
         const response = await fetchImg(query, page, 3);
-        console.log(response);
         setTotal(response.total_pages);
         setHits((prev) => [...prev, ...response.results]);
       } catch (error) {
-        console.log(error);
         setIsError(true);
         setHits([]);
       } finally {
@@ -67,7 +65,11 @@ const App = () => {
       <div className="container">
         {hits.length > 0 && (
           <>
-            {query && <div>Here is some {query}...</div>}
+            {query && (
+              <div>
+                Here is some <strong>{query}</strong>:
+              </div>
+            )}
             <ImageGallery
               items={hits}
               openModal={openModal}
