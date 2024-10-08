@@ -13,6 +13,7 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   useEffect(() => {
@@ -21,12 +22,22 @@ const App = () => {
       try {
         setIsLoading(true);
         setIsError(false);
+        setErrorMessage("");
         const response = await fetchImg(query, page, 3);
-        setTotal(response.total_pages);
-        setHits((prev) => [...prev, ...response.results]);
+
+        if (response.results.length === 0) {
+          setErrorMessage(`No images found for "${query}".`);
+          setIsError(true);
+          return;
+        } else {
+          setTotal(response.total_pages);
+          setHits((prev) => [...prev, ...response.results]);
+        }
       } catch (error) {
         setIsError(true);
         setHits([]);
+        setQuery("");
+        setErrorMessage(error.message || "Unknown error occurred");
       } finally {
         setIsLoading(false);
       }
@@ -59,9 +70,13 @@ const App = () => {
 
   return (
     <div className="app">
-      <SearchBar onSubmit={handleSetQuery} />
+      <SearchBar
+        onSubmit={handleSetQuery}
+        setErrorMessage={setErrorMessage}
+        setIsError={setIsError}
+      />
       {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
+      {isError && <ErrorMessage message={errorMessage} />}
       <div className="container">
         {hits.length > 0 && (
           <>
@@ -84,7 +99,9 @@ const App = () => {
           modalUrls={modalUrls}
           alt={alt}
         />
-        {total > page && !isLoading && <LoadMoreBtn loadMore={loadMore} />}
+        {total > page && !isLoading && !isError && (
+          <LoadMoreBtn loadMore={loadMore} />
+        )}
       </div>
     </div>
   );

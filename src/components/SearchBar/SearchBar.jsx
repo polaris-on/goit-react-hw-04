@@ -1,16 +1,34 @@
 import { Form, Formik, Field } from "formik";
 import s from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ onSubmit, setErrorMessage, setIsError }) => {
   const initialValues = {
     query: "",
   };
-  const handleSubmit = (values) => {
+  const validate = (values) => {
+    const errors = {};
+    if (!values.query.trim()) {
+      errors.query = "Please enter a search term";
+      setIsError(true);
+      setErrorMessage(errors.query);
+    } else {
+      setErrorMessage("");
+      setIsError(false);
+    }
+    return errors;
+  };
+  const handleSubmit = (values, { resetForm }) => {
+    setErrorMessage("");
     onSubmit(values.query);
+    resetForm();
   };
   return (
     <header className={s.header}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validate={validate}
+      >
         <Form className={s.form}>
           <Field
             className={s.searchInput}
