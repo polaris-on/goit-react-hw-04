@@ -28,6 +28,7 @@ const SearchBar = ({ onSubmit, setErrorMessage, setIsError }) => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validate={validate}
+        validateOnBlur={false}
       >
         <Form className={s.form}>
           <Field
