@@ -15,7 +15,7 @@ const App = () => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(null);
   useEffect(() => {
     if (!query) return;
     const getData = async () => {
@@ -23,7 +23,7 @@ const App = () => {
         setIsLoading(true);
         setIsError(false);
         setErrorMessage("");
-        const response = await fetchImg(query, page, 3);
+        const response = await fetchImg(query, page, 6);
 
         if (response.results.length === 0) {
           setErrorMessage(`No images found for "${query}".`);

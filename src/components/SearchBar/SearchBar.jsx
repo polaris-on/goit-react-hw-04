@@ -1,5 +1,6 @@
 import { Form, Formik, Field } from "formik";
 import s from "./SearchBar.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const SearchBar = ({ onSubmit, setErrorMessage, setIsError }) => {
   const initialValues = {
@@ -9,8 +10,7 @@ const SearchBar = ({ onSubmit, setErrorMessage, setIsError }) => {
     const errors = {};
     if (!values.query.trim()) {
       errors.query = "Please enter a search term";
-      setIsError(true);
-      setErrorMessage(errors.query);
+      toast.error(errors.query);
     } else {
       setErrorMessage("");
       setIsError(false);
@@ -24,6 +24,7 @@ const SearchBar = ({ onSubmit, setErrorMessage, setIsError }) => {
   };
   return (
     <header className={s.header}>
+      <Toaster />
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
