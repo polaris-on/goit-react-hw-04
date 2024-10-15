@@ -45,10 +45,12 @@ const App = () => {
     getData();
   }, [query, page]);
 
-  const handleSetQuery = (query) => {
-    setQuery(query);
-    setHits([]);
-    setPage(1);
+  const handleSetQuery = (newQuery) => {
+    if (newQuery !== query) {
+      setQuery(newQuery);
+      setHits([]);
+      setPage(1);
+    }
   };
   const loadMore = () => setPage((prev) => prev + 1);
 
@@ -87,8 +89,8 @@ const App = () => {
             )}
             <ImageGallery
               items={hits}
-              openModal={openModal}
-              closeModal={closeModal}
+              onImageClick={openModal}
+              // closeModal={closeModal}
             />
           </>
         )}
